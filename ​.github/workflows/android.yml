@@ -35,4 +35,6 @@ jobs:
       with:
         name: Sensi-Max-Booster-Build
         path: app/build/outputs/apk/debug/app-debug.apk
+        
+  
 
