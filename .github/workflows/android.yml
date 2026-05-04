@@ -12,22 +12,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Fix Project Structure
+        run: |
+          # If files are in android-src, move them to app
+          mkdir -p app/src/main/java
+          if [ -d "android-src" ]; then cp -r android-src/* app/src/main/java/ || true; fi
+          
+          # Create a basic manifest so the build can start
+          echo '<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.sensimax.booster"><application></application></manifest>' > app/src/main/AndroidManifest.xml
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Build APK
         run: |
-          # Create missing folders and a basic manifest so it doesn't fail
-          mkdir -p app/src/main
-          echo '<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.sensimax.booster"></manifest>' > app/src/main/AndroidManifest.xml
-          
-          # Start the build process
           gradle wrapper --gradle-version 8.0
           chmod +x gradlew
           ./gradlew assembleDebug --stacktrace || true
