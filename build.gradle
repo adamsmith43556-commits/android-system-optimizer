@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.android.application' version '8.0.2' apply false
-}
-
 allprojects {
     repositories {
         google()
@@ -19,3 +15,20 @@ allprojects {
     }
 }
 
+// This defines the "app" part of your project
+project(':app') {
+    apply plugin: 'com.android.application'
+    
+    android {
+        namespace 'com.sensimax.booster'
+        compileSdk 33
+        
+        defaultConfig {
+            applicationId "com.sensimax.booster"
+            minSdk 24
+            targetSdk 33
+            versionCode 1
+            versionName "1.0"
+        }
+    }
+}
